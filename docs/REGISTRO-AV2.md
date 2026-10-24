@@ -1,6 +1,6 @@
 # Registro individual — AV2
 
-Estudante: **Maria Gabriella da Silva Calado** — Data: **2/10/2026**  — Caminho: **B (MiniLoja)**
+Estudante: **Maria Gabriella da Silva Calado** — Data: **21/10/2026**  — Caminho: **B (MiniLoja)**
 
 ## Escopo (seis campos)
 - **Objetivo:** separar subtotal, desconto e frete de `calcular_total` em funções nomeadas e usar `FRETE_POR_UF`/`TAXA_POR_UF` (já declaradas e nunca usadas) como fonte única, sem mudar nenhuma saída.
