@@ -24,3 +24,18 @@ class TestHandlers(unittest.TestCase):
         )
         self.assertEqual(status, 409)
         self.assertEqual(corpo["sku"], "CHUTEIRA-42")
+
+    def test_usuario_nao_ve_pedido_de_outro_usuario(self):
+        # R4.1: um usuário só pode ver os próprios pedidos.
+        # Decisão (ESCOPO-AV3.md): pedido alheio responde 404, como um inexistente.
+        status, pedido = handlers.post_pedidos(
+            10, {"itens": [{"sku": "CAMISA-M", "preco": 40.0, "qtd": 1}], "uf": "PE"}
+        )
+        self.assertEqual(status, 201)
+        status2, corpo = handlers.get_pedido(99, pedido["id"])
+        status_inexistente, corpo_inexistente = handlers.get_pedido(99, -1)
+        self.assertEqual(status_inexistente, 404)
+        self.assertEqual(status2, 404)
+        for campo in ("id", "usuario_id", "itens", "total", "total_fmt"):
+            self.assertNotIn(campo, corpo)
+        self.assertEqual(corpo, corpo_inexistente)

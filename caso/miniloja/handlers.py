@@ -34,6 +34,6 @@ def post_pedidos(usuario_id, payload):
 
 def get_pedido(usuario_id, pedido_id):
     pedido = _repo.obter(pedido_id)
-    if pedido is None:
+    if pedido is None or pedido.get("usuario_id") != usuario_id:
         return 404, {"erro": "não encontrado"}
     return 200, pedido
